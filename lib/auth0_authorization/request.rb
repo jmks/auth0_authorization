@@ -8,32 +8,26 @@ module Auth0Authorization
     end
 
     def get(url, params = {})
-      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, params))
-
-      Response.new(request(Net::HTTP::Get, uri))
+      Response.new(request(Net::HTTP::Get, url, params, {}))
     end
 
     def post(url, params = {}, body = {})
-      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, params))
-
-      Response.new(request(Net::HTTP::Post, uri, body))
+      Response.new(request(Net::HTTP::Post, url, params, body))
     end
 
     def patch(url, params = {}, body = {})
-      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, params))
-
-      Response.new(request(Net::HTTP::Patch, uri, body))
+      Response.new(request(Net::HTTP::Patch, url, params, body))
     end
 
     def delete(url, params = {}, body = {})
-      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, params))
-
-      Response.new(request(Net::HTTP::Delete, uri, body))
+      Response.new(request(Net::HTTP::Delete, url, params, body))
     end
 
     private
 
-    def request(klass, uri, body = {})
+    def request(klass, url, url_params, body = {})
+      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, url_params))
+
       http = Net::HTTP.new(uri.host, uri.port)
       http.use_ssl = true
       http.verify_mode = OpenSSL::SSL::VERIFY_PEER
