@@ -29,8 +29,8 @@ module Auth0Authorization
       req = klass.new(uri)
 
       if body.any?
-        req["Content-Type"] = "application/x-www-form-urlencoded"
-        req.body = URI.encode_www_form(body)
+        req["Content-Type"] = "application/json"
+        req.body = JSON.dump(body)
       end
 
       req["Authorization"] = @token.header if @token
