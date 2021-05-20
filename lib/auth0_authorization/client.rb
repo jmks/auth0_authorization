@@ -68,6 +68,17 @@ module Auth0Authorization
       end
     end
 
+    def add_group(user_id, group_id)
+      url = "#{@extension_url}/users/:user_id/groups"
+      response = authenticated_request.patch(url, { user_id: user_id }, [group_id])
+
+      if response.success?
+        true
+      else
+        oh_noes(url, response)
+      end
+    end
+
     private
 
     def authenticated_request

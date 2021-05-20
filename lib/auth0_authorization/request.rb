@@ -19,6 +19,12 @@ module Auth0Authorization
       Response.new(request(Net::HTTP::Post, uri, body))
     end
 
+    def patch(url, params = {}, body = {})
+      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, params))
+
+      Response.new(request(Net::HTTP::Patch, uri, body))
+    end
+
     private
 
     def request(klass, uri, body = {})
