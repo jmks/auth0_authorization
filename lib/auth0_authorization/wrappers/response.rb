@@ -5,11 +5,11 @@ module Auth0Authorization
     end
 
     def code
-      @raw.code
+      @raw.code.to_i
     end
 
     def success?
-      code == "200"
+      code >= 200 && code <= 299
     end
 
     def body

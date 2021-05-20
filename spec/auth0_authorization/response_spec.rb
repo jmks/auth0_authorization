@@ -7,6 +7,12 @@ module Auth0Authorization
         expect(response).to be_success
       end
 
+      it "returns true when response code is 2XX" do
+        response = Response.new(OpenStruct.new(code: "204"))
+
+        expect(response).to be_success
+      end
+
       it "returns false otherwise" do
         response = Response.new(OpenStruct.new(code: "403"))
 
