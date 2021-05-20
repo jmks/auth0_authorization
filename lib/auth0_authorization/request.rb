@@ -25,6 +25,12 @@ module Auth0Authorization
       Response.new(request(Net::HTTP::Patch, uri, body))
     end
 
+    def delete(url, params = {}, body = {})
+      uri = URI(Auth0Authorization::Utils::URL.interpolate(url, params))
+
+      Response.new(request(Net::HTTP::Delete, uri, body))
+    end
+
     private
 
     def request(klass, uri, body = {})

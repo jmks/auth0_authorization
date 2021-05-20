@@ -79,6 +79,17 @@ module Auth0Authorization
       end
     end
 
+    def remove_users(group_id, user_ids)
+      url = "#{@extension_url}/groups/:group_id/members"
+      response = authenticated_request.delete(url, { group_id: group_id }, user_ids)
+
+      if response.success?
+        true
+      else
+        oh_noes(url, response)
+      end
+    end
+
     private
 
     def authenticated_request
