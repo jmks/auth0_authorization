@@ -22,7 +22,7 @@ module Auth0Authorization
       end
 
       context "when body is not JSON" do
-        it "returns the body" do
+        it "returns an empty body" do
           response = Response.new(OpenStruct.new(body: JSON.dump("")))
 
           expect(response.body).to eq("")
@@ -32,6 +32,12 @@ module Auth0Authorization
           response = Response.new(OpenStruct.new(body: "Not JSON"))
 
           expect(response.body).to eq("Not JSON")
+        end
+
+        it "returns a nil body" do
+          response = Response.new(OpenStruct.new(body: nil))
+
+          expect(response.body).to eq(nil)
         end
       end
     end

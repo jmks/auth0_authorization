@@ -16,6 +16,8 @@ module Auth0Authorization
       JSON.parse(@raw.body)
     rescue JSON::ParserError
       @raw.body
+    rescue TypeError, "no implicit conversion of nil into String"
+      nil
     end
   end
 end
