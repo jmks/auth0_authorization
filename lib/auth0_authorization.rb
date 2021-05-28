@@ -24,4 +24,16 @@ module Auth0Authorization
     @@config ||= Config.new
     @@config
   end
+
+  def self.client
+    @@client ||= Client.new(
+      auth_url: config.auth_url,
+      extension_url: config.extension_url,
+      client_id: config.client_id,
+      client_secret: config.client_secret,
+      api_identifier: config.api_identifier
+    )
+    @@client.connect
+    @@client
+  end
 end
