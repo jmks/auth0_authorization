@@ -41,6 +41,20 @@ module Auth0Authorization
       end
     end
 
+    def group(group_id)
+      url = "#{@extension_url}/groups/:group_id"
+      response = authenticated_request.get(
+        url,
+        { group_id: group_id }
+      )
+
+      if response.success?
+        Group.new(response.body)
+      else
+        oh_noes(url, response)
+      end
+    end
+
     # TODO: pagination with over 100 users
     def users
       url = "#{@extension_url}/users"
